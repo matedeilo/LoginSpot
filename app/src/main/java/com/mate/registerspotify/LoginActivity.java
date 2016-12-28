@@ -1,15 +1,21 @@
 package com.mate.registerspotify;
 
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +30,14 @@ public class LoginActivity extends AppCompatActivity {
 
     @BindView(R.id.radio_group_dots)
     RadioGroup radioGroupDots;
+
+    @BindView(R.id.button_register)
+    Button buttonRegister;
+
+
+    private static final int NUM_PAGES = 4;
+    Timer timer;
+    int page = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +55,12 @@ public class LoginActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
             public void onPageSelected(int position) {
                 radioGroupDots.check(radioGroupDots.getChildAt(position).getId());
+                page = position;
             }
 
             @Override
@@ -56,15 +70,35 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 //        setupDotsLayout();
+        pageSwitcher(5);
+    }
+    
+    public void pageSwitcher(int seconds) {
+        timer = new Timer(); // At this line a new Thread will be created
+        timer.scheduleAtFixedRate(new RemindTask(), 0, seconds * 1000); // delay
+        // in
+        // milliseconds
     }
 
-    private void setupDotsLayout(){
-        for (int i = 0; i < 4; i++){
-            RadioButton rb = new RadioButton(this);
-            rb.setLayoutParams(new FrameLayout.LayoutParams(10,10));
-            rb.setBackground(ContextCompat.getDrawable(this, R.drawable.intro_button_selector));
-            rb.setButtonDrawable(null);
-            radioGroupDots.addView(rb);
+    // this is an inner class...
+    class RemindTask extends TimerTask {
+
+        @Override
+        public void run() {
+
+            // As the TimerTask run on a seprate thread from UI thread we have
+            // to call runOnUiThread to do work on UI thread.
+            runOnUiThread(new Runnable() {
+                public void run() {
+
+                    if (page > 3) { // In my case the number of pages are 5
+//                        timer.cancel();
+                        page = 0;
+                    }
+                    viewPager.setCurrentItem(page++);
+                }
+            });
+
         }
     }
 }

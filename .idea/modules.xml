@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RegisterSpotify.iml" filepath="$PROJECT_DIR$/RegisterSpotify.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LoginSpot.iml" filepath="$PROJECT_DIR$/LoginSpot.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

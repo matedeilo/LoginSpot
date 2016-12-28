@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:textColor="@color/colorLoginDescription"
         android:id="@+id/tview_title" />
 
     <TextView
@@ -17,5 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:textAlignment="center"
+        android:textColor="@color/colorLoginDescription"
         android:id="@+id/tview_description" />
 </LinearLayout>
