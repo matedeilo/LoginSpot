@@ -13,4 +13,12 @@
     <string name="slide_4_title">World Travel</string>
     <string name="slide_4_desc">Book tickets of any transportation and travel the world!</string>
 
+    <string name="facebook_app_id">115151955652445</string>
+
+    <string-array name="gender_array">
+        <item>Masculino</item>
+        <item>Femenino</item>
+    </string-array>
+
+
 </resources>

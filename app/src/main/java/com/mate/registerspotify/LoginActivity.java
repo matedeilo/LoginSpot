@@ -1,5 +1,6 @@
 package com.mate.registerspotify;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -13,12 +14,15 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -34,8 +38,6 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.button_register)
     Button buttonRegister;
 
-
-    private static final int NUM_PAGES = 4;
     Timer timer;
     int page = 1;
 
@@ -72,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
 //        setupDotsLayout();
         pageSwitcher(5);
     }
-    
+
     public void pageSwitcher(int seconds) {
         timer = new Timer(); // At this line a new Thread will be created
         timer.scheduleAtFixedRate(new RemindTask(), 0, seconds * 1000); // delay
@@ -101,4 +103,10 @@ public class LoginActivity extends AppCompatActivity {
 
         }
     }
+
+    @OnClick(R.id.button_register) void callRegister() {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        this.startActivity(intent);
+    }
+
 }
